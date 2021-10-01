@@ -1,0 +1,12 @@
+VIEW "SKILLS_VIEW"(
+    "SKILL_ID",
+    "SKILL_NAME",
+    "SKILL_TYPE",
+    "ELEMENT"
+) as SELECT
+    "SKLL"."SKILL_ID" as "Skill_ID",
+    "SKLL"."SKILL_NAME" as "Skill_Name",
+    "SKLL"."TYPES"."SKILL_TYPE_NAME" as "Skill_Type",
+    "SKLL"."ELEM"."ELEMENT_NAME" as "Element"
+    FROM "SKILLS" as "SKLL"
+-- with read only STRUCTURED PRIVILEGE check

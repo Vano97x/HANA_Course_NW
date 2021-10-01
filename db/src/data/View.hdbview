@@ -1,0 +1,14 @@
+VIEW "RES_VIEW"(
+    "RESIDENT_ID",
+    "NAME",
+    "LAST_NAME",
+    "IS_NINJA",
+    "STATUS"
+) as SELECT
+    "RES"."RESIDENT_ID" as "Resident_ID",
+    "RES"."NAME" as "Name",
+    "RES"."LAST_NAME" as "Last_Name",
+    "RES"."IS_NINJA" as "Is_Ninja",
+    "RES"."STS"."STATUS_NAME" as "Status"
+    FROM "RESIDENTS" as "RES"
+-- with read only STRUCTURED PRIVILEGE check
