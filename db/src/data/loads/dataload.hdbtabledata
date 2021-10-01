@@ -89,5 +89,20 @@
         "import_settings": {
             "include_filter" : [ ]
         }
+	},
+    {
+	    "target_table": "VILLAGE",
+	    "source_data": {
+		    "data_type": "CSV",
+		    "file_name": "village.csv",
+		    "has_header": true,
+		    "dialect": "HANA",
+		    "type_config": {
+			    "delimiter": ","
+		    }
+	    },
+        "import_settings": {
+            "include_filter" : [ ]
+        }
 	}]
 }		
