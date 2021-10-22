@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="ResidentTest" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="ResidentTest"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="STATUS">
+    <resourceUri>STATUS</resourceUri>
+  </DataSource>
+  <DataSource id="VILL_ST_TEXT_1">
+    <resourceUri>VILL_ST_TEXT</resourceUri>
+  </DataSource>
+  <DataSource id="VILLAGE">
+    <resourceUri>VILLAGE</resourceUri>
+  </DataSource>
+  <DataSource id="VILL_ST_TEXT">
+    <resourceUri>VILL_ST_TEXT</resourceUri>
+  </DataSource>
+  <DataSource id="RESIDENTS">
+    <resourceUri>RESIDENTS</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" cardinality="C1_1" joinType="textTable" languageColumn="LANGUAGE" multiJoinNode="Join_1" multiJoinCentralTable="RESIDENTS" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="NAME_2"/>
+      <viewAttribute id="STATUS_ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="STATUS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATUS_ID" source="STATUS_ID"/>
+    </input>
+    <input node="VILL_ST_TEXT_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME_2" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATUS_ID" source="ID"/>
+    </input>
+    <joinAttribute name="STATUS_ID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_2" cardinality="C1_1" joinType="textTable" languageColumn="LANGUAGE" multiJoinNode="Join_1" multiJoinCentralTable="RESIDENTS" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="NAME_1"/>
+      <viewAttribute id="VILLAGE_ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="VILLAGE">
+      <mapping xsi:type="Calculation:AttributeMapping" target="VILLAGE_ID" source="VILLAGE_ID"/>
+    </input>
+    <input node="VILL_ST_TEXT">
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME_1" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VILLAGE_ID" source="ID"/>
+    </input>
+    <joinAttribute name="VILLAGE_ID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_3" cardinality="CN_1" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="RESIDENTS" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="RESIDENT_ID"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="LAST_NAME"/>
+      <viewAttribute id="NAME_2"/>
+      <viewAttribute id="VILLAGE_ID"/>
+      <viewAttribute hidden="true" id="JOIN$STATUS_ID$STATUS_ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="RESIDENTS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="RESIDENT_ID" source="RESIDENT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LAST_NAME" source="LAST_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VILLAGE_ID" source="VILLAGE_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$STATUS_ID$STATUS_ID" source="STATUS_ID"/>
+    </input>
+    <input node="Join_1_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME_2" source="NAME_2"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$STATUS_ID$STATUS_ID" source="STATUS_ID"/>
+    </input>
+    <joinAttribute name="JOIN$STATUS_ID$STATUS_ID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_4" cardinality="CN_1" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="RESIDENTS" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="RESIDENT_ID"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="LAST_NAME"/>
+      <viewAttribute id="NAME_1"/>
+      <viewAttribute id="NAME_2"/>
+      <viewAttribute hidden="true" id="JOIN$VILLAGE_ID$VILLAGE_ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Join_1_3">
+      <mapping xsi:type="Calculation:AttributeMapping" target="RESIDENT_ID" source="RESIDENT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LAST_NAME" source="LAST_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME_2" source="NAME_2"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$VILLAGE_ID$VILLAGE_ID" source="VILLAGE_ID"/>
+    </input>
+    <input node="Join_1_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME_1" source="NAME_1"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$VILLAGE_ID$VILLAGE_ID" source="VILLAGE_ID"/>
+    </input>
+    <joinAttribute name="JOIN$VILLAGE_ID$VILLAGE_ID"/>
+  </calculationView>
+</calculationViews>
+
+<logicalModel id="Join_1_4">
+  <attributes>
+    <attribute id="RESIDENT_ID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Resident ID"/>
+      <keyMapping columnObjectName="Join_1_4" columnName="RESIDENT_ID"/>
+    </attribute>
+    <attribute id="NAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Resident Name"/>
+      <keyMapping columnObjectName="Join_1_4" columnName="NAME"/>
+    </attribute>
+    <attribute id="LAST_NAME" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Resident Last Name"/>
+      <keyMapping columnObjectName="Join_1_4" columnName="LAST_NAME"/>
+    </attribute>
+    <attribute id="NAME_1" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Name Village"/>
+      <keyMapping columnObjectName="Join_1_4" columnName="NAME_1"/>
+    </attribute>
+    <attribute id="NAME_2" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Name Status"/>
+      <keyMapping columnObjectName="Join_1_4" columnName="NAME_2"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="91" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+    
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="91" y="213"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="RESIDENTS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="620" y="30"/>
+      <rectangleSize width="158.7353515625"/>
+    </shape>
+    <shape modelObjectName="VILLAGE" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="380" y="30"/>
+      <rectangleSize width="169.7568359375"/>
+    </shape>
+  
+    <shape modelObjectName="STATUS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="855" y="30"/>
+      <rectangleSize width="165.65869140625"/>
+    </shape>
+    <shape modelObjectName="VILL_ST_TEXT" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="82" y="30"/>
+      <rectangleSize width="149.34765625"/>
+    </shape>
+    <shape modelObjectName="VILL_ST_TEXT" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="1106" y="30"/>
+      <rectangleSize width="256.03515625"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

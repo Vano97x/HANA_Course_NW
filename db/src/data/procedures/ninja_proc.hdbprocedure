@@ -1,0 +1,11 @@
+PROCEDURE "ninja_proc"( )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+    SELECT count(*) as skill_count, res.NAME 
+        FROM "RESIDENTS" as res INNER JOIN "NINJA_SKILLS" AS ns ON res.resident_id = ns.resident_id 
+        INNER JOIN "SKILLS" as skl on ns.skill_id = skl.skill_id
+        GROUP BY res.NAME;
+END

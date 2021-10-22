@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="SkillView" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="SkillView"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="SKILLS">
+    <resourceUri>SKILLS</resourceUri>
+  </DataSource>
+  <DataSource id="ELEMENTS">
+    <resourceUri>ELEMENTS</resourceUri>
+  </DataSource>
+  <DataSource id="SKILL_TYPES">
+    <resourceUri>SKILL_TYPES</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" cardinality="CN_N" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="SKILLS" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="SKILL_NAME"/>
+      <viewAttribute id="ELEMENT_NAME"/>
+      <viewAttribute id="SKILL_TYPE_ID"/>
+      <viewAttribute hidden="true" id="JOIN$ELEMENT_ID$ELEMENT_ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="SKILLS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SKILL_NAME" source="SKILL_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SKILL_TYPE_ID" source="SKILL_TYPE_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ELEMENT_ID$ELEMENT_ID" source="ELEMENT_ID"/>
+    </input>
+    <input node="ELEMENTS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ELEMENT_NAME" source="ELEMENT_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ELEMENT_ID$ELEMENT_ID" source="ELEMENT_ID"/>
+    </input>
+    <joinAttribute name="JOIN$ELEMENT_ID$ELEMENT_ID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_2" cardinality="C1_1" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="SKILLS" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="SKILL_NAME"/>
+      <viewAttribute id="SKILL_TYPE_NAME"/>
+      <viewAttribute id="ELEMENT_NAME"/>
+      <viewAttribute hidden="true" id="JOIN$SKILL_TYPE_ID$SKILL_TYPE_ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Join_1_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SKILL_NAME" source="SKILL_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ELEMENT_NAME" source="ELEMENT_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SKILL_TYPE_ID$SKILL_TYPE_ID" source="SKILL_TYPE_ID"/>
+    </input>
+    <input node="SKILL_TYPES">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SKILL_TYPE_NAME" source="SKILL_TYPE_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SKILL_TYPE_ID$SKILL_TYPE_ID" source="SKILL_TYPE_ID"/>
+    </input>
+    <joinAttribute name="JOIN$SKILL_TYPE_ID$SKILL_TYPE_ID"/>
+  </calculationView>
+</calculationViews>
+
+<logicalModel id="Join_1_2">
+  <attributes>
+    <attribute id="SKILL_NAME" order="1" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Skill Name"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="SKILL_NAME"/>
+    </attribute>
+    <attribute id="SKILL_TYPE_NAME" order="2" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Skill Type Name"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="SKILL_TYPE_NAME"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="ELEMENT_NAME" order="3" aggregationType="count" measureType="simple">
+      <descriptions defaultDescription="Element Name"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="ELEMENT_NAME"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+    
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="180"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="SKILLS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="335" y="41"/>
+      <rectangleSize width="167.9306640625"/>
+    </shape>
+    <shape modelObjectName="SKILL_TYPES" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="20" y="41"/>
+      <rectangleSize width="188.71142578125"/>
+    </shape>
+    <shape modelObjectName="ELEMENTS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="615" y="41"/>
+      <rectangleSize width="175.85302734375"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

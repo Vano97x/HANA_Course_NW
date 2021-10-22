@@ -104,5 +104,35 @@
         "import_settings": {
             "include_filter" : [ ]
         }
-	}]
+	},
+    {
+	    "target_table": "VILL_ST_TEXT",
+	    "source_data": {
+		    "data_type": "CSV",
+		    "file_name": "vill_st_text.csv",
+		    "has_header": true,
+		    "dialect": "HANA",
+		    "type_config": {
+			    "delimiter": ","
+		    }
+        },
+        "import_settings": {
+            "include_filter" : [ ]
+        }
+    },
+    {
+	    "target_table": "ELEM_TY_TEXT",
+	    "source_data": {
+		    "data_type": "CSV",
+		    "file_name": "elem_ty_text.csv",
+		    "has_header": true,
+		    "dialect": "HANA",
+		    "type_config": {
+			    "delimiter": ","
+		    }
+        },
+        "import_settings": {
+            "include_filter" : [ ]
+        }
+    }]
 }		

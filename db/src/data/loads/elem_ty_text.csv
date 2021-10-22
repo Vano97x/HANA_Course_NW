@@ -1,0 +1,19 @@
+ID,LANGUAGE,NAME
+1,E,Fire
+1,R,Огонь
+2,E,Water
+2,R,Вода
+3,E,Lightning
+3,R,Молния
+4,E,Rock
+4,R,Камень
+5,E,Wind
+5,R,Ветер
+11,E,Ninjutsu
+11,R,Нинджуцу
+12,E,Genjursu
+12,R,Генджуцу
+13,E,Thaijutsu
+13,R,Тайджуцу
+14,E,Fuinjutsu
+14,R,Техника запечатывания

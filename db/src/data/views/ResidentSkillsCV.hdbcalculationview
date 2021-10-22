@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="ResidentSkillsCV" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="ResidentCV"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="NINJA_SKILLS">
+    <resourceUri>NINJA_SKILLS</resourceUri>
+  </DataSource>
+  <DataSource id="SKILL_TYPES">
+    <resourceUri>SKILL_TYPES</resourceUri>
+  </DataSource>
+  <DataSource id="SKILLS">
+    <resourceUri>SKILLS</resourceUri>
+  </DataSource>
+  <DataSource id="ELEMENTS">
+    <resourceUri>ELEMENTS</resourceUri>
+  </DataSource>
+  <DataSource id="RESIDENTS">
+    <resourceUri>RESIDENTS</resourceUri>
+  </DataSource>
+  <DataSource id="VILLAGE">
+    <resourceUri>VILLAGE</resourceUri>
+  </DataSource>
+  <DataSource id="STATUS">
+    <resourceUri>STATUS</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="ResidentSkills_1" cardinality="CN_1" joinType="inner" multiJoinNode="ResidentSkills" multiJoinCentralTable="ResidentsJoin" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="SKILL_TYPE_NAME"/>
+      <viewAttribute id="ELEMENT_NAME"/>
+      <viewAttribute id="SKILL_NAME"/>
+      <viewAttribute id="RESIDENT_ID"/>
+      <viewAttribute hidden="true" id="JOIN$SKILL_ID$SKILL_ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="SkillsJoin_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SKILL_TYPE_NAME" source="SKILL_TYPE_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ELEMENT_NAME" source="ELEMENT_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SKILL_NAME" source="SKILL_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SKILL_ID$SKILL_ID" source="SKILL_ID"/>
+    </input>
+    <input node="NINJA_SKILLS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="RESIDENT_ID" source="RESIDENT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SKILL_ID$SKILL_ID" source="SKILL_ID"/>
+    </input>
+    <joinAttribute name="JOIN$SKILL_ID$SKILL_ID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="ResidentSkills_2" cardinality="C1_N" joinType="inner" multiJoinNode="ResidentSkills" multiJoinCentralTable="ResidentsJoin" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="SKILL_TYPE_NAME"/>
+      <viewAttribute id="ELEMENT_NAME"/>
+      <viewAttribute id="SKILL_NAME"/>
+      <viewAttribute id="RESIDENT_ID"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="LAST_NAME"/>
+      <viewAttribute id="STATUS_NAME"/>
+      <viewAttribute id="VILLAGE_NAME"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ResidentsJoin_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="RESIDENT_ID" source="RESIDENT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LAST_NAME" source="LAST_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATUS_NAME" source="STATUS_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VILLAGE_NAME" source="VILLAGE_NAME"/>
+    </input>
+    <input node="ResidentSkills_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SKILL_TYPE_NAME" source="SKILL_TYPE_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ELEMENT_NAME" source="ELEMENT_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SKILL_NAME" source="SKILL_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="RESIDENT_ID" source="RESIDENT_ID"/>
+    </input>
+    <joinAttribute name="RESIDENT_ID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="SkillsJoin_1" cardinality="C1_N" joinType="inner" multiJoinNode="SkillsJoin" multiJoinCentralTable="SKILLS" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="SKILL_TYPE_NAME"/>
+      <viewAttribute id="SKILL_NAME"/>
+      <viewAttribute id="SKILL_ID"/>
+      <viewAttribute id="ELEMENT_ID"/>
+      <viewAttribute hidden="true" id="JOIN$SKILL_TYPE_ID$SKILL_TYPE_ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="SKILL_TYPES">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SKILL_TYPE_NAME" source="SKILL_TYPE_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SKILL_TYPE_ID$SKILL_TYPE_ID" source="SKILL_TYPE_ID"/>
+    </input>
+    <input node="SKILLS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SKILL_ID" source="SKILL_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SKILL_NAME" source="SKILL_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ELEMENT_ID" source="ELEMENT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SKILL_TYPE_ID$SKILL_TYPE_ID" source="SKILL_TYPE_ID"/>
+    </input>
+    <joinAttribute name="JOIN$SKILL_TYPE_ID$SKILL_TYPE_ID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="SkillsJoin_2" cardinality="CN_N" joinType="inner" multiJoinNode="SkillsJoin" multiJoinCentralTable="SKILLS" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="SKILL_TYPE_NAME"/>
+      <viewAttribute id="ELEMENT_NAME"/>
+      <viewAttribute id="SKILL_NAME"/>
+      <viewAttribute id="SKILL_ID"/>
+      <viewAttribute hidden="true" id="JOIN$ELEMENT_ID$ELEMENT_ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="SkillsJoin_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SKILL_TYPE_NAME" source="SKILL_TYPE_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SKILL_NAME" source="SKILL_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SKILL_ID" source="SKILL_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ELEMENT_ID$ELEMENT_ID" source="ELEMENT_ID"/>
+    </input>
+    <input node="ELEMENTS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ELEMENT_NAME" source="ELEMENT_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ELEMENT_ID$ELEMENT_ID" source="ELEMENT_ID"/>
+    </input>
+    <joinAttribute name="JOIN$ELEMENT_ID$ELEMENT_ID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="ResidentsJoin_1" cardinality="CN_1" joinType="inner" multiJoinNode="ResidentsJoin" multiJoinCentralTable="RESIDENTS" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="RESIDENT_ID"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="LAST_NAME"/>
+      <viewAttribute id="VILLAGE_NAME"/>
+      <viewAttribute id="VILLAGE_ID"/>
+      <viewAttribute id="STATUS_ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="RESIDENTS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="RESIDENT_ID" source="RESIDENT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LAST_NAME" source="LAST_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VILLAGE_ID" source="VILLAGE_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATUS_ID" source="STATUS_ID"/>
+    </input>
+    <input node="VILLAGE">
+      <mapping xsi:type="Calculation:AttributeMapping" target="VILLAGE_NAME" source="VILLAGE_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VILLAGE_ID" source="VILLAGE_ID"/>
+    </input>
+    <joinAttribute name="VILLAGE_ID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="ResidentsJoin_2" cardinality="C1_N" joinType="inner" multiJoinNode="ResidentsJoin" multiJoinCentralTable="RESIDENTS" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="RESIDENT_ID"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="LAST_NAME"/>
+      <viewAttribute id="STATUS_NAME"/>
+      <viewAttribute id="VILLAGE_NAME"/>
+      <viewAttribute id="VILLAGE_ID"/>
+      <viewAttribute id="STATUS_ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ResidentsJoin_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="RESIDENT_ID" source="RESIDENT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LAST_NAME" source="LAST_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VILLAGE_NAME" source="VILLAGE_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VILLAGE_ID" source="VILLAGE_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATUS_ID" source="STATUS_ID"/>
+    </input>
+    <input node="STATUS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATUS_NAME" source="STATUS_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATUS_ID" source="STATUS_ID"/>
+    </input>
+    <joinAttribute name="STATUS_ID"/>
+  </calculationView>
+</calculationViews>
+
+<logicalModel id="ResidentSkills_2">
+  <attributes>
+    <attribute id="NAME" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Name"/>
+      <keyMapping columnObjectName="ResidentSkills_2" columnName="NAME"/>
+    </attribute>
+    <attribute id="LAST_NAME" order="2" displayAttribute="false" attributeHierarchyActive="false" hidden="true">
+      <descriptions defaultDescription="Last Name"/>
+      <keyMapping columnObjectName="ResidentSkills_2" columnName="LAST_NAME"/>
+    </attribute>
+    <attribute id="SKILL_NAME" order="3" displayAttribute="false" attributeHierarchyActive="false" hidden="true">
+      <descriptions defaultDescription="Skill"/>
+      <keyMapping columnObjectName="ResidentSkills_2" columnName="SKILL_NAME"/>
+    </attribute>
+    <attribute id="SKILL_TYPE_NAME" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Skill Type"/>
+      <keyMapping columnObjectName="ResidentSkills_2" columnName="SKILL_TYPE_NAME"/>
+    </attribute>
+    <attribute id="ELEMENT_NAME" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Elements"/>
+      <keyMapping columnObjectName="ResidentSkills_2" columnName="ELEMENT_NAME"/>
+    </attribute>
+    <attribute id="STATUS_NAME" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Satus"/>
+      <keyMapping columnObjectName="ResidentSkills_2" columnName="STATUS_NAME"/>
+    </attribute>
+    <attribute id="VILLAGE_NAME" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Village"/>
+      <keyMapping columnObjectName="ResidentSkills_2" columnName="VILLAGE_NAME"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes>
+    <calculatedAttribute id="FULL_NAME" order="8" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Full Name"/>
+      <keyCalculation datatype="NVARCHAR" expressionLanguage="SQL" length="30">
+        <formula>CONCAT(&quot;NAME&quot;, IFNULL(CONCAT(' ', &quot;LAST_NAME&quot;), ' '))</formula>
+      </keyCalculation>
+    </calculatedAttribute>
+  </calculatedAttributes>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="ResidentSkills" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="ResidentsJoin" modelObjectNameSpace="ResidentSkills" modelObjectType="JoinNodeInput" multiJoinViewNodeName="ResidentSkills">
+      <upperLeftCorner x="79" y="30"/>
+      <rectangleSize width="169"/>
+    </shape>
+    <shape modelObjectName="SkillsJoin" modelObjectNameSpace="ResidentSkills" modelObjectType="JoinNodeInput" multiJoinViewNodeName="ResidentSkills">
+      <upperLeftCorner x="602" y="30"/>
+      <rectangleSize width="188"/>
+    </shape>
+    <shape modelObjectName="NINJA_SKILLS" modelObjectNameSpace="ResidentSkills" modelObjectType="JoinNodeInput" multiJoinViewNodeName="ResidentSkills">
+      <upperLeftCorner x="353" y="30"/>
+      <rectangleSize width="158"/>
+    </shape>
+    <shape expanded="true" modelObjectName="SkillsJoin" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="318" y="371"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="ELEMENTS" modelObjectNameSpace="SkillsJoin" modelObjectType="JoinNodeInput" multiJoinViewNodeName="SkillsJoin">
+      <upperLeftCorner x="641" y="30"/>
+      <rectangleSize width="175"/>
+    </shape>
+    <shape modelObjectName="SKILL_TYPES" modelObjectNameSpace="SkillsJoin" modelObjectType="JoinNodeInput" multiJoinViewNodeName="SkillsJoin">
+      <upperLeftCorner x="119" y="30"/>
+      <rectangleSize width="188"/>
+    </shape>
+    <shape modelObjectName="SKILLS" modelObjectNameSpace="SkillsJoin" modelObjectType="JoinNodeInput" multiJoinViewNodeName="SkillsJoin">
+      <upperLeftCorner x="391" y="30"/>
+      <rectangleSize width="167"/>
+    </shape>
+    <shape expanded="true" modelObjectName="ResidentsJoin" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="371"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="STATUS" modelObjectNameSpace="ResidentsJoin" modelObjectType="JoinNodeInput" multiJoinViewNodeName="ResidentsJoin">
+      <upperLeftCorner x="629" y="24"/>
+      <rectangleSize width="165"/>
+    </shape>
+    <shape modelObjectName="RESIDENTS" modelObjectNameSpace="ResidentsJoin" modelObjectType="JoinNodeInput" multiJoinViewNodeName="ResidentsJoin">
+      <upperLeftCorner x="361" y="24"/>
+      <rectangleSize width="158"/>
+    </shape>
+    <shape modelObjectName="VILLAGE" modelObjectNameSpace="ResidentsJoin" modelObjectType="JoinNodeInput" multiJoinViewNodeName="ResidentsJoin">
+      <upperLeftCorner x="73" y="24"/>
+      <rectangleSize width="169"/>
+    </shape></shapes>
+</layout>
+</Calculation:scenario>
