@@ -1,0 +1,17 @@
+COLUMN TABLE "RESIDENTS"(
+    "RESIDENT_ID" INTEGER unique NOT NULL  COMMENT 'Resident ID',
+    "NAME" CHAR(20) NOT NULL COMMENT 'Resident Name',
+    "LAST_NAME" CHAR(20) NOT NULL COMMENT 'Resident Last Name',
+    "IS_NINJA" BOOLEAN COMMENT 'Is resident ninja or not',
+    "VILLAGE_ID" INTEGER COMMENT 'Village ID',
+    "STATUS_ID" INTEGER COMMENT 'Status ID',
+    "FULL_NAME" as CONCAT(NAME, IfNull(Concat(' ', LAST_NAME),'')),
+    PRIMARY KEY ("RESIDENT_ID")
+) WITH ASSOCIATIONS(JOIN "VILLAGE" as "VILL" on "VILLAGE_ID" = "VILL"."VILLAGE_ID",
+                 JOIN "STATUS" as "STS" on "STATUS_ID" = "STS"."STATUS_ID",
+                 JOIN "NINJA_SKILLS" as "NJ_SKL" on "RESIDENT_ID" = "NJ_SKL"."RESIDENT_ID" )
+
+
+                -- ( JOIN  "OPENSAP_MD_ADDRESSES" AS "ADDRESS" ON address.ID = address_ID, JOIN  "OPENSAP_MD_EMPLOYEES" AS "CREATEDBYEMPLOYEE" ON createdByEmployee.email = createdBy, JOIN  "SAP_COMMON_CURRENCIES" AS "CURRENCY" ON currency.code = currency_code, JOIN  "OPENSAP_MD_EMPLOYEES" AS "MODIFIEDBYEMPLOYEE" ON modifiedByEmployee.email = modifiedBy)  UNLOAD PRIORITY 5  AUTO MERGE 
+
+

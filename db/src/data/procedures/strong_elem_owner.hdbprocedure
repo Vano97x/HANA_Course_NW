@@ -1,0 +1,13 @@
+PROCEDURE "strong_elem_owner"( in elem NVARCHAR )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+
+    elem_table = SELECT res.name, skl.skill_name, elem.element_name
+        FROM "RESIDENTS" as res INNER JOIN "NINJA_SKILLS" AS ns ON res.resident_id = ns.resident_id 
+        INNER JOIN "SKILLS" as skl on ns.skill_id = skl.skill_id
+        INNER JOIN "ELEMENTS" as elem on elem.ELEMENT_ID = skl.ELEMENT_ID;
+        
+END

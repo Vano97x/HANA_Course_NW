@@ -1,0 +1,13 @@
+PROCEDURE "is_element_compatible"( IN elem NVARCHAR, out is_elem BOOLEAN )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+    lt_elem_ex = SELECT * from "ELEMENTS" WHERE ELEMENT_NAME = :elem;
+    if is_empty(:lt_elem_ex) THEN
+        is_elem = false;
+    ELSE
+        is_elem = TRUE;
+    end if;
+END

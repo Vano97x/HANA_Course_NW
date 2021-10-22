@@ -1,0 +1,138 @@
+{
+    "format_version": 1,
+    "imports": [{
+	    "target_table": "RESIDENTS",
+	    "source_data": {
+		    "data_type": "CSV",
+		    "file_name": "residents.csv",
+		    "has_header": true,
+		    "dialect": "HANA",
+		    "type_config": {
+			    "delimiter": ","
+		    }
+        },
+        "import_settings": {
+            "include_filter" : [ ]
+        }
+    },
+    {
+	    "target_table": "STATUS",
+	    "source_data": {
+		    "data_type": "CSV",
+		    "file_name": "status.csv",
+		    "has_header": true,
+		    "dialect": "HANA",
+		    "type_config": {
+			    "delimiter": ","
+		    }
+        },
+        "import_settings": {
+            "include_filter" : [ ]
+        }
+    },
+    {
+	    "target_table": "ELEMENTS",
+	    "source_data": {
+		    "data_type": "CSV",
+		    "file_name": "elements.csv",
+		    "has_header": true,
+		    "dialect": "HANA",
+		    "type_config": {
+			    "delimiter": ","
+		    }
+        },
+        "import_settings": {
+            "include_filter" : [ ]
+        }
+    },
+    {
+	    "target_table": "SKILLS",
+	    "source_data": {
+		    "data_type": "CSV",
+		    "file_name": "skills.csv",
+		    "has_header": true,
+		    "dialect": "HANA",
+		    "type_config": {
+			    "delimiter": ","
+		    }
+	    },
+        "import_settings": {
+            "include_filter" : [ ]
+        }
+	},
+    {
+	    "target_table": "SKILL_TYPES",
+	    "source_data": {
+		    "data_type": "CSV",
+		    "file_name": "skill_types.csv",
+		    "has_header": true,
+		    "dialect": "HANA",
+		    "type_config": {
+			    "delimiter": ","
+		    }
+	    },
+        "import_settings": {
+            "include_filter" : [ ]
+        }
+	},
+    {
+	    "target_table": "NINJA_SKILLS",
+	    "source_data": {
+		    "data_type": "CSV",
+		    "file_name": "ninja_skills.csv",
+		    "has_header": true,
+		    "dialect": "HANA",
+		    "type_config": {
+			    "delimiter": ","
+		    }
+	    },
+        "import_settings": {
+            "include_filter" : [ ]
+        }
+	},
+    {
+	    "target_table": "VILLAGE",
+	    "source_data": {
+		    "data_type": "CSV",
+		    "file_name": "village.csv",
+		    "has_header": true,
+		    "dialect": "HANA",
+		    "type_config": {
+			    "delimiter": ","
+		    }
+	    },
+        "import_settings": {
+            "include_filter" : [ ]
+        }
+	},
+    {
+	    "target_table": "VILL_ST_TEXT",
+	    "source_data": {
+		    "data_type": "CSV",
+		    "file_name": "vill_st_text.csv",
+		    "has_header": true,
+		    "dialect": "HANA",
+		    "type_config": {
+			    "delimiter": ","
+		    }
+        },
+        "import_settings": {
+            "include_filter" : [ ]
+        }
+    },
+    {
+	    "target_table": "ELEM_TY_TEXT",
+	    "source_data": {
+		    "data_type": "CSV",
+		    "file_name": "elem_ty_text.csv",
+		    "has_header": true,
+		    "dialect": "HANA",
+		    "type_config": {
+			    "delimiter": ","
+		    }
+        },
+        "import_settings": {
+            "include_filter" : [ ]
+        }
+    }]
+}		
